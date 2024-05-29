@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    <persistence-unit name="hello">
+        <properties>
+            <!-- H2 -->
+<!--            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>-->
+<!--            <property name="jakarta.persistence.jdbc.user" value="sa"/>-->
+<!--            <property name="jakarta.persistence.jdbc.password" value=""/>-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>-->
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
+
+            <!-- Oracle -->
+            <property name="jakarta.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="jakarta.persistence.jdbc.user" value="system"/>
+            <property name="jakarta.persistence.jdbc.password" value="oracle"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
+
+            <!-- 옵션 -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <!-- batch size-->
+            <property name="hibernate.jdbc.batch_size" value="100"/>
+
+
+            <!--
+            create : SessionFactory 시작시 스키마를 삭제하고 다시 생성
+            create-drop : SessionFactory 종료시 스키마를 삭제
+            update : SessionFactory 시작시 객체 구성와 스키마를 비교하여 컬럼 추가/삭제 작업을 진행 - 엔티티컬럼 추가됨 => 테이블컬럼 추가
+                                                                                       엔티티컬럼 삭제됨 => 테이블컬럼 유지
+            validate : SessionFactory 시작시 객체구성과 스키마가 다르다면 예외 발생시킴 - 테이블컬럼 O, 엔티티컬럼 X : 정상,
+                                                                              테이블컬럼 X, 엔티티컬럼 O : SchemaManagementException
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+    </persistence-unit>
+</persistence>
